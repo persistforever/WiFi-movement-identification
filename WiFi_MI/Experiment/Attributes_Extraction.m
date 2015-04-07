@@ -3,13 +3,14 @@ function trainData = Attributes_Extraction(y)
 %   input : y - sequence of dataSet
 %   output : etp - std value
 % -------------------------------------------------------------------------
-    n = 5 ; % number of attributes
+    n = 6 ; % number of attributes
     trainData = zeros(1, n) ; % training dataset
     trainData(1,1) = attr_normalized_std(y) ;
     trainData(1,2) = attr_motion_period(y) ;
     trainData(1,3) = attr_median_absolute_deviation(y) ;
     trainData(1,4) = attr_interquartile_range(y) ;
     trainData(1,5) = attr_info_entropy(y) ;
+    trainData(1,6) = attr_range(y) ;
 
 %% 1. function to calculate normalized standard deviation
 function nstd = attr_normalized_std(y)
@@ -83,3 +84,11 @@ function etp = attr_info_entropy(y)
         end
         etp=etp+Hi;
     end
+    
+%% 7. function to calculate range
+function rg = attr_range(y)
+%   calculate the range of y
+%   input : y - sequence of dataSet
+%   output : rg - range value
+%   -----------------------------------------------------------------------
+    rg = max(y) - min(y) ;

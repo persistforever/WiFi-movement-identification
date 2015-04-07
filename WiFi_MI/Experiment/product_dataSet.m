@@ -3,20 +3,19 @@ function Corr = product_dataSet()
     
 %     k=1 ;
     Corr = zeros(40, 3) ;
-    for i=1:2
+    for i=1:9
         for j=1:1
             cd .. ;
-            name = strcat('sample_data/other/test_pick', num2str(i), '.dat') ;
+            tmpname = strcat('test_chair2stand', num2str(i)) ;
+%             tmpname = strcat(num2str(i), '_', num2str(j)) ;
+            name = strcat('sample_data/chair2stand/', tmpname, '.dat') ;
             csi_trace = read_bf_file(name);
             cd Experiment ;
             dataSet = plotTimeGraph(csi_trace) ;
-%             tmp = corrcoef(dataSet) ;
-%             Corr(k,:) = [tmp(1,2), tmp(1,3), tmp(2,3)] ;
-%             k = k+1 ;
-            picname = strcat('result_pic/picture4/test_pick', num2str(i), '.jpg') ;
-            dataname = strcat('result_pic/mat4/test_pick', num2str(i), '.mat') ;
+            picname = strcat('result_pic/picture/', tmpname, '_1.jpg') ;
+%             dataname = strcat('result_pic/picture/', tmpname, '1.mat') ;
             saveas(gcf, picname) ;
-            save(dataname, 'dataSet') ;
+%             save(dataname, 'dataSet') ;
         end
     end
 end
