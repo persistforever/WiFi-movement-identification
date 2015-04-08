@@ -4,8 +4,8 @@ function [trainData, trainLabel] = create_training_data()
 %            trainLabel - label of examples
 % -------------------------------------------------------------------------
     % initializes
-    m = 64 ;
-    n = 6 ;
+    m = 74 ;
+    n = 12 ;
     trainData = zeros(m, n) ;
     trainLabel = zeros(m, 1) ;
     num = 1 ;
@@ -14,7 +14,7 @@ function [trainData, trainLabel] = create_training_data()
     for i=1:22
         name = strcat('pattern_data/pattern_pick/pattern_pick', num2str(i), '.mat') ;
         tmp = importdata(name) ;
-        trainData(num, :) = Attributes_Extraction([tmp(:,1); tmp(:,3)]) ;
+        trainData(num, :) = [Attributes_Extraction(tmp(:,1)), Attributes_Extraction(tmp(:,3))] ;
         trainLabel(num) = 1 ;
         num = num + 1 ;
     end
@@ -23,7 +23,7 @@ function [trainData, trainLabel] = create_training_data()
     for i=1:14
         name = strcat('pattern_data/pattern_stand2sit/pattern_stand2sit', num2str(i), '.mat') ;
         tmp = importdata(name) ;
-        trainData(num, :) = Attributes_Extraction([tmp(:,1); tmp(:,3)]) ;
+        trainData(num, :) = [Attributes_Extraction(tmp(:,1)), Attributes_Extraction(tmp(:,3))] ;
         trainLabel(num) = 2 ;
         num = num + 1 ;
     end
@@ -32,7 +32,7 @@ function [trainData, trainLabel] = create_training_data()
     for i=1:9
         name = strcat('pattern_data/pattern_sit2stand/pattern_sit2stand', num2str(i), '.mat') ;
         tmp = importdata(name) ;
-        trainData(num, :) = Attributes_Extraction([tmp(:,1); tmp(:,3)]) ;
+        trainData(num, :) = [Attributes_Extraction(tmp(:,1)), Attributes_Extraction(tmp(:,3))] ;
         trainLabel(num) = 3 ;
         num = num + 1 ;
     end
@@ -41,7 +41,7 @@ function [trainData, trainLabel] = create_training_data()
     for i=1:9
         name = strcat('pattern_data/pattern_chair2stand/pattern_chair2stand', num2str(i), '.mat') ;
         tmp = importdata(name) ;
-        trainData(num, :) = Attributes_Extraction([tmp(:,1); tmp(:,3)]) ;
+        trainData(num, :) = [Attributes_Extraction(tmp(:,1)), Attributes_Extraction(tmp(:,3))] ;
         trainLabel(num) = 4 ;
         num = num + 1 ;
     end
@@ -50,8 +50,17 @@ function [trainData, trainLabel] = create_training_data()
     for i=1:10
         name = strcat('pattern_data/pattern_stand2chair/pattern_stand2chair', num2str(i), '.mat') ;
         tmp = importdata(name) ;
-        trainData(num, :) = Attributes_Extraction([tmp(:,1); tmp(:,3)]) ;
+        trainData(num, :) = [Attributes_Extraction(tmp(:,1)), Attributes_Extraction(tmp(:,3))] ;
         trainLabel(num) = 5 ;
+        num = num + 1 ;
+    end
+    
+    % iterative read data(stand2sofa, for label 6)
+    for i=1:10
+        name = strcat('pattern_data/pattern_stand2sofa/pattern_stand2sofa', num2str(i), '.mat') ;
+        tmp = importdata(name) ;
+        trainData(num, :) = [Attributes_Extraction(tmp(:,1)), Attributes_Extraction(tmp(:,3))] ;
+        trainLabel(num) = 6 ;
         num = num + 1 ;
     end
 end

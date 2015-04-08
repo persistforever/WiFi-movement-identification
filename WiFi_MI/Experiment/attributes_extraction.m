@@ -1,4 +1,4 @@
-function trainData = Attributes_Extraction(y)
+function trainData = attributes_extraction(y)
 % extract attributes from y 
 %   input : y - sequence of dataSet
 %   output : etp - std value

@@ -1,4 +1,4 @@
-function fea_col = feature_selection(trainData, trainLabel)
+function [fea_col, wrong_rate] = feature_selection(trainData, trainLabel)
 %   use different algorithms to select optimal features
 %   input : svm_trainer - svm trainer for each class
 %            testData - attributes set of examples
@@ -8,8 +8,10 @@ function fea_col = feature_selection(trainData, trainLabel)
     [fea_col2, wrong2] = SBS(trainData, trainLabel) ;
     if wrong1 < wrong2
         fea_col = fea_col1 ;
+        wrong_rate = wrong1 ;
     else 
         fea_col = fea_col2 ;
+        wrong_rate = wrong2 ;
     end
 
 function [fea_col, wrong] = SFS(trainData, trainLabel)
@@ -18,7 +20,7 @@ function [fea_col, wrong] = SFS(trainData, trainLabel)
 %            testData - attributes set of examples
 %   output : fea_col - columns position of optimal features
 %   -----------------------------------------------------------------------
-    numFeature = 6 ;
+    numFeature = 12 ;
     condidate = 1:1:numFeature ;
     selected = zeros(1,numFeature) ;
     wrong = size(trainData, 1) ;
@@ -28,12 +30,10 @@ function [fea_col, wrong] = SFS(trainData, trainLabel)
             selected(i) = condidate(j) ;
             tmpTrainData = trainData(:, selected(1:i)) ;
             tmptrainLabel = trainLabel ;
-            svm_trainer = svm_training(tmpTrainData, tmptrainLabel) ;
-            classify_label = svm_classifying(svm_trainer, tmpTrainData) ;
-            wrong_num = sum(classify_label ~= tmptrainLabel) ;
-            if wrong_num < wrong
+            wrong_rate = cross_validation(tmpTrainData, tmptrainLabel) ;
+            if wrong_rate < wrong
                 pos = j ;
-                wrong = wrong_num ;
+                wrong = wrong_rate ;
             end
         end
         if pos == 0
@@ -53,7 +53,7 @@ function [fea_col, wrong] = SBS(trainData, trainLabel)
 %            testData - attributes set of examples
 %   output : fea_col - columns position of optimal features
 %   -----------------------------------------------------------------------
-    numFeature = 6 ;
+    numFeature = 12 ;
     condidate = 1:1:numFeature ;
     selected = zeros(1,numFeature) ;
     tmpTrainData = trainData(:, condidate) ;
@@ -69,12 +69,10 @@ function [fea_col, wrong] = SBS(trainData, trainLabel)
             tmpcond(selected(1:i)) = [] ;
             tmpTrainData = trainData(:, tmpcond) ;
             tmptrainLabel = trainLabel ;
-            svm_trainer = svm_training(tmpTrainData, tmptrainLabel) ;
-            classify_label = svm_classifying(svm_trainer, tmpTrainData) ;
-            wrong_num = sum(classify_label ~= tmptrainLabel) ;
-            if wrong_num < wrong
+            wrong_rate = cross_validation(tmpTrainData, tmptrainLabel) ;
+            if wrong_rate < wrong
                 pos = j ;
-                wrong = wrong_num ;
+                wrong = wrong_rate ;
             end
         end
         if pos == 0
