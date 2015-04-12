@@ -1,4 +1,4 @@
-function wrong_rate = cross_validation(dataSet, label)
+function wrong_rate = cross_validation(dataSet, label, numTrainer)
 %   cross validation to train and test classifiers, use 20% data as test
 %   input : trainData - attributes set of examples
 %           trainLabel - label of examples
@@ -54,8 +54,14 @@ function wrong_rate = cross_validation(dataSet, label)
         % testData
         testLabel = subSet{i}(:,end) ;
         testData = subSet{i}(:,1:end-1) ;
-        svm_trainer = svm_training(trainData, trainLabel) ;
-        classify_label = svm_classifying(svm_trainer, testData) ;
+        switch numTrainer
+            case 1
+                svm_trainer = svm_training(trainData, trainLabel) ;
+                classify_label = svm_classifying(svm_trainer, testData) ;
+            case 2
+                lda_trainer = lda_training(trainData, trainLabel) ;
+                classify_label = lda_classifying(lda_trainer, testData) ;
+        end
         t_num = sum(classify_label ~= testLabel) ;
         numWrong = numWrong + t_num ;
         numTest = numTest + size(testData, 1) ;

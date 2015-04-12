@@ -9,6 +9,15 @@ function svm_trainer = svm_training(trainData, trainLabel)
     for i=1:numClass
         subLabel = zeros(size(trainLabel, 1), 1) ;
         subLabel(trainLabel == i, 1) = 1 ;
-        svm_trainer{i} = svmtrain(trainData, subLabel, 'kernel_function', 'polynomial', 'polyorder', 2) ;
+        % choose type
+        type = 2 ;
+        switch type
+            case 1
+                svm_trainer{i} = svmtrain(trainData, subLabel, 'kernel_function', 'polynomial', 'polyorder', 1) ;
+            case 2 
+                svm_trainer{i} = svmtrain(trainData, subLabel, 'kernel_function', 'polynomial', 'polyorder', 2) ;
+            case 3
+                svm_trainer{i} = svmtrain(trainData, subLabel, 'kernel_function', 'rbf') ;
+        end
     end
 end

@@ -1,16 +1,16 @@
 function product_dataSet()
 %   function to product dataSet from sample/*.dat
 %   -----------------------------------------------------------------------
-    for i=1:10
-        for j=1:1
+    for i=1:5
+        for j=1
             cd .. ;
-            tmpname = strcat('test_run', num2str(i)) ;
-            name = strcat('sample_data/run/', tmpname, '.dat') ;
+            tmpname = strcat('test_sit_slow', num2str(i)) ;
+            name = strcat('sample_data/other/', tmpname, '.dat') ;
             csi_trace = read_bf_file(name);
             cd Experiment ; 
             dataSet = plotTimeGraph(csi_trace) ;
-            picname = strcat('result_pic/run/', tmpname, '.jpg') ;
-            dataname = strcat('result_pic/run/', tmpname, '.mat') ;
+            picname = strcat('result_pic/picture/', tmpname, '.jpg') ;
+            dataname = strcat('result_pic/picture/', tmpname, '.mat') ;
             saveas(gcf, picname) ;
             save(dataname, 'dataSet') ;
         end

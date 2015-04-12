@@ -18,6 +18,7 @@ function dataSet = plotTimeGraph(csi_trace)
             dataSet = guassian_flitering(dataSet) ;
         case 2
             dataSet = time_flitering(dataSet) ;
+        case 3
     end
     
     % ploting
