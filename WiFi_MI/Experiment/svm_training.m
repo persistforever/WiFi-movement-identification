@@ -18,6 +18,8 @@ function svm_trainer = svm_training(trainData, trainLabel)
                 svm_trainer{i} = svmtrain(trainData, subLabel, 'kernel_function', 'polynomial', 'polyorder', 2) ;
             case 3
                 svm_trainer{i} = svmtrain(trainData, subLabel, 'kernel_function', 'rbf') ;
+            case 4
+                svm_trainer{i} = svmtrain(trainData, subLabel) ;
         end
     end
 end

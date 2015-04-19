@@ -1,10 +1,8 @@
 function lrd_all = get_Lrd_All(curve, dis_all, k_dis_all, k)
-% 计算每个点的Lrd
 n = size(curve,1);
 lrd_all = zeros(n, 1) ;
 for i=1:n
     k_nearest = [ dis_all(:, i), (1:1:n)' ] ;
-    % 对距离排序并去最小的k个
     k_nearest = sort(k_nearest, 1) ;
     signal = k_nearest(2:k+1, :) ;
     num = 0 ;

@@ -1,6 +1,4 @@
 function disMat = get_Distance_All(curve)
-%返回任意两点之间的距离矩阵
-%s为n*2的矩阵，disMat为n*n的矩阵
 n = size(curve,1);
 disMat = zeros(n);
 for i = 1:n

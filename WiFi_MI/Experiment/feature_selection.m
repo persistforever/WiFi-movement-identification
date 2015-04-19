@@ -22,7 +22,7 @@ function [fea_col, wrong] = SFS(trainData, trainLabel, trainer)
 %           trainer -  which classfier to use(1-SVM, 2-LDA)
 %   output : fea_col - columns position of optimal features
 %   -----------------------------------------------------------------------
-    numFeature = 12 ;
+    numFeature = 16 ;
     condidate = 1:1:numFeature ;
     selected = zeros(1,numFeature) ;
     wrong = size(trainData, 1) ;
@@ -56,7 +56,7 @@ function [fea_col, wrong] = SBS(trainData, trainLabel, trainer)
 %           trainer -  which classfier to use(1-SVM, 2-LDA)
 %   output : fea_col - columns position of optimal features
 %   -----------------------------------------------------------------------
-    numFeature = 12 ;
+    numFeature = 16 ;
     condidate = 1:1:numFeature ;
     selected = zeros(1,numFeature) ;
     tmpTrainData = trainData(:, condidate) ;

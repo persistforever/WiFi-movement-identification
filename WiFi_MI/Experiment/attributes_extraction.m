@@ -3,7 +3,7 @@ function trainData = attributes_extraction(y)
 %   input : y - sequence of dataSet
 %   output : etp - std value
 % -------------------------------------------------------------------------
-    n = 6 ; % number of attributes
+    n = 8 ; % number of attributes
     trainData = zeros(1, n) ; % training dataset
     trainData(1,1) = attr_normalized_std(y) ;
     trainData(1,2) = attr_motion_period(y) ;
@@ -11,6 +11,8 @@ function trainData = attributes_extraction(y)
     trainData(1,4) = attr_interquartile_range(y) ;
     trainData(1,5) = attr_info_entropy(y) ;
     trainData(1,6) = attr_range(y) ;
+    trainData(1,7) = attr_min(y) ;
+    trainData(1,8) = attr_max(y) ;
 
 %% 1. function to calculate normalized standard deviation
 function nstd = attr_normalized_std(y)
@@ -92,3 +94,19 @@ function rg = attr_range(y)
 %   output : rg - range value
 %   -----------------------------------------------------------------------
     rg = max(y) - min(y) ;
+    
+%% 8. function to calculate min
+function minimum = attr_min(y)
+%   calculate the min of y
+%   input : y - sequence of dataSet
+%   output : minimum - min value
+%   -----------------------------------------------------------------------
+    minimum = min(y) ;
+    
+%% 9. function to calculate max
+function maximum = attr_max(y)
+%   calculate the max of y
+%   input : y - sequence of dataSet
+%   output : maximum - max value
+%   -----------------------------------------------------------------------
+    maximum = max(y) ;
